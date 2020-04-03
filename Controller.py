@@ -64,12 +64,12 @@ bat_red = [
 
 
 
-from sense_hat import SenseHat, ACTION_PRESSED, ACTION_HELD, ACTION_RELEASED
-from signal import pause
+#from sense_hat import SenseHat, ACTION_PRESSED, ACTION_HELD, ACTION_RELEASED
+#from signal import pause
 
-x = 3
-y = 3
-sense = SenseHat()
+#x = 3
+#y = 3
+#sense = SenseHat()
 
 def clamp(value, min_value=0, max_value=7):
     return min(max_value, max(min_value, value))
@@ -98,13 +98,13 @@ def refresh():
     sense.clear()
     sense.set_pixel(x, y, 255, 255, 255)
 
-sense.stick.direction_up = pushed_up
-sense.stick.direction_down = pushed_down
-sense.stick.direction_left = pushed_left
-sense.stick.direction_right = pushed_right
-sense.stick.direction_any = refresh
-refresh()
-pause()
+#sense.stick.direction_up = pushed_up
+#sense.stick.direction_down = pushed_down
+#sense.stick.direction_left = pushed_left
+#sense.stick.direction_right = pushed_right
+#sense.stick.direction_any = refresh
+#refresh()
+#pause()
 
 
 

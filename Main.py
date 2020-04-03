@@ -7,7 +7,7 @@ import time
 print("booting")
 
 drone1 = Drone.Drone('192.1.1.1',8889)
-controller1 = Controller(drone1)
+controller1 = Controller.Controller(drone1)
 
 #Diagnostics
 
