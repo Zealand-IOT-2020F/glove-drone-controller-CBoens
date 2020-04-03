@@ -9,17 +9,26 @@ class Controller(object):
 
         self.sense.stick.direction_up = self.pushed_up
         self.sense.stick.direction_middle = self.pushed_middle
+        self.sense.stick.direction_down = self.pushed_down
     
-    def pushed_middle(event):
+    def pushed_middle(self, event):
         if (event.action != ACTION_RELEASED):
-            print("Midten er trykket")
-            #drone.stop()
+            #print("Midten er trykket")
+            self.sense.set_pixels(poin_hal)
+            self.drone.stop()
 
-    def pushed_up(event):
-        if (event.action == ACTION_RELEASED):
-            print("Op er trykket")
-            #drone.takeOff()
+    def pushed_up(self, event):
+        if (event.action != ACTION_RELEASED):
+            #print("Op er trykket")
+            self.sense.set_pixels(poin_up)
+            self.drone.takeOff()
     
+    def pushed_down(self, event):
+        if (event.action != ACTION_RELEASED):
+            self.sense.set_pixels(poin_down)
+            self.drone.land()
+    
+
 
     
 # colours defined
@@ -27,6 +36,7 @@ r = (255, 0, 0) # red
 g = (0, 255, 0) # Green
 y = (255, 255, 0) # Yellow
 o = (0, 0, 0) # Black
+w = (255, 255, 255) # White
 
 #farve matrixer
 
@@ -62,6 +72,43 @@ bat_red = [
     r, r, r, r, r, r, r, r,
     r, r, r, r, r, r, r, r
 ]
+
+# Pile
+
+poin_up = [
+    o, o, o, w, w, o, o, o,
+    o, o, w, w, w, w, o, o,
+    o, w, w, w, w, w, w, o,
+    o, w, o, w, w, o, w, o,
+    o, o, o, o, o, o, o, o,
+    o, o, o, w, w, o, o, o,
+    o, o, o, o, o, o, o, o,
+    o, o, o, w, w, o, o, o
+]
+
+poin_down = [
+    o, o, o, w, w, o, o, o,
+    o, o, o, o, o, o, o, o,
+    o, o, o, w, w, o, o, o,
+    o, o, o, o, o, o, o, o,
+    o, w, o, w, w, o, w, o,
+    o, w, w, w, w, w, w, o,
+    o, o, w, w, w, w, o, o,
+    o, o, o, w, w, o, o, o
+]
+
+poin_hal = [
+    o, o, o, o, o, o, o, o,
+    o, o, w, w, w, w, o, o,
+    o, w, w, o, o, w, w, o,
+    o, w, o, o, o, o, w, o,
+    o, w, o, o, o, o, w, o,
+    o, w, w, o, o, w, w, o,
+    o, o, w, w, w, w, o, o,
+    o, o, o, o, o, o, o, o
+]
+
+
 
 
 
@@ -107,14 +154,3 @@ def refresh():
 #sense.stick.direction_any = refresh
 #refresh()
 #pause()
-
-
-
-
-
-def repeat():
-    global temp
-    newtemp = round (temp, 1)
-
-    if (temp > 35):
-	    sense.set_pixels(temp_pixel35)

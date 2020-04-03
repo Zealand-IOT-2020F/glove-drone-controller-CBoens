@@ -10,11 +10,11 @@ class Drone(object):
         print("ip: " + ip)
         self.TelloPort = port
         # Create a UDP socket
-        self.Host =''
+        self.Host = ''
         self.HostPort = 9000
         self.locaddr = (self.Host,self.HostPort)
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        self.tello_address = ('192.168.10.1', 8889)
+        self.tello_address = ('127.0.0.1', 9000)
         self.sock.bind(self.locaddr)
 
     
