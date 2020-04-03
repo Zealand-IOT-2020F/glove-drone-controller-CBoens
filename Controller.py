@@ -7,8 +7,8 @@ class Controller(object):
         self.sense = SenseHat()
         self.drone = drone
 
-        self.sense.stick.direction_up = pushed_up
-        self.sense.stick.direction_middle = pushed_middle
+        self.sense.stick.direction_up = self.pushed_up
+        self.sense.stick.direction_middle = self.pushed_middle
     
     def pushed_middle(event):
         if (event.action != ACTION_RELEASED):
