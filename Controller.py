@@ -12,11 +12,13 @@ class Controller(object):
     
     def pushed_middle(event):
         if (event.action != ACTION_RELEASED):
-            drone.stop()
+            print("Midten er trykket")
+            #drone.stop()
 
     def pushed_up(event):
         if (event.action == ACTION_RELEASED):
-            drone.takeOff()
+            print("Op er trykket")
+            #drone.takeOff()
     
 
     
