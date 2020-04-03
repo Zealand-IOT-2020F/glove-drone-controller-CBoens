@@ -17,12 +17,19 @@ while(True):
         controller1.check_roll()
         controller1.check_pitch()
 
-#Diagnostics
 
-#drone1.printinfo()
+#TakeOff/landing
 
-#drone1.connect()
+# After starting the program you make the drone takeoff by pressing and holding the sensehat joystick
+# landing is done by then pressing and holding the sensehat joystick
 
-#drone1.battery()
 
-#Action
+#Controls
+
+#If you pitch the sensehat forward (45-90degrees) the drone will asecend 20cm
+#If you pitch the sensehat backwards (45-90degrees) the drone will descend 20cm
+#rolling the sensehat right (45-90degrees) should make the drone Yaw(rotate on own axis) clockwise
+#rolling the sensehat left (45-90degrees) should make the drone Yaw(rotate on own axis) counterclockwise
+#**This can be dependent on your sensehat!**
+
+#a quick press of the joystick should halt the drone.
