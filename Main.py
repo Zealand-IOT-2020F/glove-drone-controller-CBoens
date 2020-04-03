@@ -10,8 +10,12 @@ print("booting")
 drone1 = Drone.Drone('127.0.0.1',9000)
 controller1 = Controller.Controller(drone1)
 
+
 while(True):
-    pause()
+    time.sleep(0.5)
+    yaw = controller1.sense.get_orientation()
+    print(yaw)
+
 #Diagnostics
 
 #drone1.printinfo()

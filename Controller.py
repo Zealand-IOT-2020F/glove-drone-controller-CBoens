@@ -28,6 +28,9 @@ class Controller(object):
             self.sense.set_pixels(poin_down)
             self.drone.land()
     
+    def check_yaw(self):
+        yaw = self.sense.get_orientation()
+    
 
 
     
