@@ -1,12 +1,14 @@
 from sense_hat import SenseHat, ACTION_PRESSED, ACTION_HELD, ACTION_RELEASED
-import Drone
+import time
 
-sense.set_imu_config(False, True, False)
+
 
 class Controller(object):
     def __init__(self, drone):
         self.sense = SenseHat()
         self.drone = drone
+        self.landed = True
+        #self.sense.set_imu_config(False, True, False)
 
         self.sense.stick.direction_up = self.pushed_up
         self.sense.stick.direction_middle = self.pushed_middle
@@ -19,18 +21,36 @@ class Controller(object):
             self.drone.stop()
 
     def pushed_up(self, event):
-        if (event.action != ACTION_RELEASED):
+        if (event.action == ACTION_HELD and self.landed):
             #print("Op er trykket")
             self.sense.set_pixels(poin_up)
             self.drone.takeOff()
+            self.landed = False
     
     def pushed_down(self, event):
-        if (event.action != ACTION_RELEASED):
+        if (event.action == ACTION_HELD and not self.landed):
             self.sense.set_pixels(poin_down)
             self.drone.land()
+            self.landed = True
     
-    def check_yaw(self):
-        yaw = self.sense.get_orientation()
+    def check_roll(self):
+        roll = self.sense.get_gyroscope()['roll']
+        if (roll >= 45.0 and roll < 90.0):
+            self.drone.ascend_alt(20)
+            #time.sleep(0.5)
+        elif (roll <= 315.0 and roll > 270.0):
+            self.drone.descend_alt(20)
+            #time.sleep(0.5)
+    
+    def check_pitch(self):
+        pitch = self.sense.get_gyroscope()['pitch']
+        if (pitch >= 45.0 and pitch < 90.0):
+            self.drone.ccw(5)
+            #time.sleep(0.5)
+        elif (pitch <= 315.0 and pitch > 270.0):
+            self.drone.cw(5)
+            #time.sleep(0.5)
+
     
 
 
@@ -111,50 +131,3 @@ poin_hal = [
     o, o, w, w, w, w, o, o,
     o, o, o, o, o, o, o, o
 ]
-
-
-
-
-
-
-#from sense_hat import SenseHat, ACTION_PRESSED, ACTION_HELD, ACTION_RELEASED
-#from signal import pause
-
-#x = 3
-#y = 3
-#sense = SenseHat()
-
-def clamp(value, min_value=0, max_value=7):
-    return min(max_value, max(min_value, value))
-
-def pushed_up(event):
-    global y
-    if event.action != ACTION_RELEASED:
-        y = clamp(y - 1)
-
-def pushed_down(event):
-    global y
-    if event.action != ACTION_RELEASED:
-        y = clamp(y + 1)
-
-def pushed_left(event):
-    global x
-    if event.action != ACTION_RELEASED:
-        x = clamp(x - 1)
-
-def pushed_right(event):
-    global x
-    if event.action != ACTION_RELEASED:
-        x = clamp(x + 1)
-
-def refresh():
-    sense.clear()
-    sense.set_pixel(x, y, 255, 255, 255)
-
-#sense.stick.direction_up = pushed_up
-#sense.stick.direction_down = pushed_down
-#sense.stick.direction_left = pushed_left
-#sense.stick.direction_right = pushed_right
-#sense.stick.direction_any = refresh
-#refresh()
-#pause()

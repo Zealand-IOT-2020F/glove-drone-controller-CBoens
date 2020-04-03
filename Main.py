@@ -13,8 +13,9 @@ controller1 = Controller.Controller(drone1)
 
 while(True):
     time.sleep(0.5)
-    yaw = controller1.sense.get_orientation()
-    print(yaw)
+    if (not controller1.landed):
+        controller1.check_roll()
+        controller1.check_pitch()
 
 #Diagnostics
 
