@@ -1,6 +1,7 @@
 from sense_hat import SenseHat, ACTION_PRESSED, ACTION_HELD, ACTION_RELEASED
 import Drone
 
+sense.set_imu_config(False, True, False)
 
 class Controller(object):
     def __init__(self, drone):
