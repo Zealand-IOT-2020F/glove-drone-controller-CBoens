@@ -11,10 +11,10 @@ controller1 = Controller.Controller(drone1)
 
 #Diagnostics
 
-drone1.printinfo()
+#drone1.printinfo()
 
-drone1.connect()
+#drone1.connect()
 
-drone1.battery()
+#drone1.battery()
 
 #Action
